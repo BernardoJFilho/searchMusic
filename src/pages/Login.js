@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-closing-tag-location */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { createUser } from '../services/userAPI';
@@ -41,28 +40,30 @@ class Login extends React.Component {
     return (
       <div data-testid="page-login">
         {divStatus
-          ? <>
-            <div>
-              Login
-            </div>
-            <label>
-              <input
-                name="valor"
-                data-testid="login-name-input"
-                value={ valor }
-                type="text"
-                placeholder="Login"
-                onChange={ this.buttonOn }
-              />
-            </label>
-            <button
-              data-testid="login-submit-button"
-              disabled={ buttonDisable }
-              onClick={ this.getApi }
-            >
-              Entrar
-            </button>
-          </>
+          ? (
+            <>
+              <div>
+                Login
+              </div>
+              <label>
+                <input
+                  name="valor"
+                  data-testid="login-name-input"
+                  value={ valor }
+                  type="text"
+                  placeholder="Login"
+                  onChange={ this.buttonOn }
+                />
+              </label>
+              <button
+                data-testid="login-submit-button"
+                disabled={ buttonDisable }
+                onClick={ this.getApi }
+              >
+                Entrar
+              </button>
+            </>
+          )
           : <Loading valor={ valor } />}
       </div>
     );
