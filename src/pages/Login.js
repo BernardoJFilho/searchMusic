@@ -28,9 +28,7 @@ class Login extends React.Component {
   getApi = async () => {
     this.setState({ divStatus: false });
     const { valor } = this.state;
-    const data = await createUser({ name: valor });
-    // const data = await response.json();
-    console.log(data);
+    await createUser({ name: valor });
     const { history } = this.props;
     history.push('/search');
   };
