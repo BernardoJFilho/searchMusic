@@ -31,7 +31,14 @@ class Album extends React.Component {
             </div>
           ))[0] : null }
         </div>
-        {resposta ? <MusicCard returnApi={ returnApi.slice(1) } /> : null}
+        {resposta && returnApi.map(({ trackName, previewUrl, trackId }) => (
+          <MusicCard
+            key={ trackId }
+            trackName={ trackName }
+            previewUrl={ previewUrl }
+            trackId={ trackId }
+          />
+        )).slice(1)}
       </div>
     );
   }
