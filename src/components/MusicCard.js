@@ -6,19 +6,30 @@ import Loading from './Loading';
 class MusicCard extends React.Component {
   state = { isLoading: false, favoritChecked: false };
 
-  handleChange = async ({ target }) => {
+  componentDidMount() {
+    const { favoriteSong, objApi } = this.props;
+    favoriteSong.forEach((param) => {
+      if (param.trackId === objApi.trackId) {
+        this.setState({
+          favoritChecked: true,
+        });
+      }
+    });
+  }
+
+  handleChange = async ({ target }, objApi) => {
     this.setState({
       isLoading: true,
       favoritChecked: target.checked,
     });
-    await addSong();
+    addSong(objApi);
     this.setState({
       isLoading: false,
     });
   };
 
   render() {
-    const { trackName, previewUrl, trackId } = this.props;
+    const { objApi } = this.props;
     const { isLoading, favoritChecked } = this.state;
     return (
       <div>
@@ -27,17 +38,17 @@ class MusicCard extends React.Component {
           : (
             <div>
               ------------------------------------------------------------------------
-              <div>{ trackName }</div>
-              <audio data-testid="audio-component" src={ previewUrl } controls>
+              <div>{ objApi.trackName }</div>
+              <audio data-testid="audio-component" src={ objApi.previewUrl } controls>
                 <track kind="captions" />
               </audio>
               <label>
                 Favorita
                 <input
                   type="checkbox"
-                  data-testid={ `checkbox-music-${trackId}` }
+                  data-testid={ `checkbox-music-${objApi.trackId}` }
                   checked={ favoritChecked }
-                  onChange={ this.handleChange }
+                  onChange={ (event) => this.handleChange(event, objApi) }
                 />
               </label>
               <br />
@@ -49,9 +60,8 @@ class MusicCard extends React.Component {
 }
 
 MusicCard.propTypes = {
-  trackName: PropTypes.string.isRequired,
-  previewUrl: PropTypes.string.isRequired,
-  trackId: PropTypes.number.isRequired,
+  objApi: PropTypes.shape().isRequired,
+  favoriteSong: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 };
 
 export default MusicCard;
