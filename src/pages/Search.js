@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Button, Input } from '@mui/material';
 import Header from '../components/Header';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
 import Loading from '../components/Loading';
@@ -63,23 +64,21 @@ class Search extends React.Component {
       <div data-testid="page-search">
         <Header />
         <div>
-          <label>
-            <input
-              name="pesquisar"
-              type="text"
-              placeholder="Buscar"
-              value={ pesquisar }
-              onChange={ this.buttonEnable }
-              data-testid="search-artist-input"
-            />
-          </label>
-          <button
+          <Input
+            name="pesquisar"
+            type="text"
+            placeholder="Buscar"
+            value={ pesquisar }
+            onChange={ this.buttonEnable }
+            data-testid="search-artist-input"
+          />
+          <Button
             disabled={ buttonStatus }
             data-testid="search-artist-button"
             onClick={ this.buttonSearch }
           >
             Pesquisar
-          </button>
+          </Button>
           <div>
             { loadingCondition ? <Loading /> : null }
             { returnApi
