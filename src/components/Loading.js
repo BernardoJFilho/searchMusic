@@ -1,11 +1,10 @@
+import { LinearProgress } from '@mui/material';
 import React from 'react';
 
 class Loading extends React.Component {
   render() {
     return (
-      <div>
-        Carregando...
-      </div>
+      <LinearProgress />
     );
   }
 }

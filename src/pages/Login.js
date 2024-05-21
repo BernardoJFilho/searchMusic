@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Stack, TextField } from '@mui/material';
+import { Button, Stack, TextField } from '@mui/material';
 import { createUser } from '../services/userAPI';
 import Loading from '../components/Loading';
 
@@ -40,7 +40,7 @@ class Login extends React.Component {
       <div data-testid="page-login">
         {divStatus
           ? (
-            <Stack spacing={ 0 }>
+            <Stack spacing={ 0 } padding={ 25 }>
               <TextField
                 label="Login"
                 variant="outlined"
@@ -48,16 +48,16 @@ class Login extends React.Component {
                 data-testid="login-name-input"
                 value={ valor }
                 type="text"
-                placeholder="Login"
                 onChange={ this.buttonOn }
               />
-              <button
+              <Button
                 data-testid="login-submit-button"
                 disabled={ buttonDisable }
+                variant="contained"
                 onClick={ this.getApi }
               >
                 Entrar
-              </button>
+              </Button>
             </Stack>
           )
           : <Loading valor={ valor } />}
