@@ -29,7 +29,7 @@ class Login extends React.Component {
   getApi = async () => {
     this.setState({ divStatus: false });
     const { valor } = this.state;
-    await createUser({ name: valor });
+    await createUser({ name: valor, image: '' });
     const { history } = this.props;
     history.push('/search');
   };
@@ -40,7 +40,7 @@ class Login extends React.Component {
       <div data-testid="page-login">
         {divStatus
           ? (
-            <Stack spacing={ 0 } padding={ 25 }>
+            <Stack spacing={ 0 } padding={ 40 }>
               <TextField
                 label="Login"
                 variant="outlined"

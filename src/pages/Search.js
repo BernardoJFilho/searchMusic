@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Input } from '@mui/material';
+import { Button, TextField } from '@mui/material';
 import Header from '../components/Header';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
 import Loading from '../components/Loading';
@@ -64,7 +64,7 @@ class Search extends React.Component {
       <div data-testid="page-search">
         <Header />
         <div>
-          <Input
+          <TextField
             name="pesquisar"
             type="text"
             placeholder="Buscar"
@@ -80,13 +80,13 @@ class Search extends React.Component {
             Pesquisar
           </Button>
           <div>
-            { loadingCondition ? <Loading /> : null }
+            { loadingCondition && <Loading /> }
             { returnApi
               ? (
                 `Resultado de álbuns de:  ${busca}`
               ) : null}
           </div>
-          { onAlbuns ? resultApi.map((param, index) => (
+          { onAlbuns && resultApi.map((param, index) => (
             <div key={ index }>
               <Link
                 to={ `/album/${param.collectionId}` }
@@ -97,19 +97,12 @@ class Search extends React.Component {
                 <div>{ param.artistName }</div>
               </Link>
             </div>
-          ))
-            : null }
-          { notAlbuns ? 'Nenhum álbum foi encontrado' : null }
+          ))}
+          { notAlbuns && 'Nenhum álbum foi encontrado' }
         </div>
       </div>
     );
   }
 }
-
-// respostaAPI.map((album) => {
-//   <div>
-//     {album}
-//   </div>;
-// })
 
 export default Search;
